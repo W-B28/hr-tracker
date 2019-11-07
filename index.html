@@ -17,49 +17,86 @@
       <i class="fas fa-user-friends text-primary"></i>
       My<span class="text-primary">HR</span>Tracker</h1>
 
-      <form id="worker-form">
-        <div class="form-group">
-          <label for="id"><strong>Employee ID</strong></label>
-          <input type="text" id="ID" class="form-control">
+      <form id="worker-form" class="was-validated">
+        <div class="form-row">
+          <div class="col-md-4">
+            <label for="validationFirstName">First name</label>
+            <input type="text" class="form-control is-valid" id="validationFirstName" placeholder="First name" value="Mark" required>
 
-          <label for="firstName"><strong>First Name</strong></label>
-          <input type="text" id="first" class="form-control" value="">
+          </div>
+          <div class="col-md-4 mb-3">
+            <label for="validationLastName">Last name</label>
+            <input type="text" class="form-control is-valid" id="validationLastName" placeholder="Last name" value="Otto" required>
 
-          <label for="lastName"><strong>Last Name</strong></label>
-          <input type="text" id="last" class="form-control" value="">
+          </div>
+          <div class="col-md-4 mb-3">
+            <label for="validationSalary">Salary</label>
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="inputGroupPrependDollar">$</span>
+              </div>
+              <input type="text" class="form-control is-invalid" id="validationSalary" placeholder="Salary" aria-describedby="inputSalary" required>
 
-          <label for="salary"><strong>Salary</strong></label>
-          <input type="text" id="salary" class="form-control" value="">
-
-          <label for="managerID"><strong>Manager ID</strong></label>
-          <input type="text" id="manager" class="form-control" value="">
-
-          <label for="peopleManaged"><strong>Employees Managed</strong></label>
-          <input type="text" id="managed" class="form-control" value="">
+            </div>
+          </div>
         </div>
+        <div class="form-row">
+          <div class="col-md-4 mb-3">
+            <label for="validationServer03">Employee ID</label>
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="inputGroupPrependID">#</span>
+              </div>
+              <input type="text" class="form-control is-invalid" id="validationEmployeeID" placeholder="ID" required>
+            </div>
 
-        <input type="submit" value="Submit" class="btn btn-primary btn-block">
+          </div>
+          <div class="col-md-4 mb-3">
+              <div class="form-group ">
+                <label for="exampleFormControlSelect1">Select Manager</label>
+                <select class="form-control is-invalid" id="exampleFormControlSelect1" required>
+                  <option selected></option>
+                  <option>1</option>
+                  <option>2</option>
+                  <option>3</option>
+                  <option>4</option>
+                  <option>5</option>
+                </select>
+              </div>
+          </div>
+          <div class="col-md-4 mb-3">
+            <label for="validationServer05">Manager ID</label>
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="inputGroupPrependID">#</span>
+              </div>
+              <input type="text" class="form-control is-invalid" id="validationManagerEID" placeholder="Manager ID" required>
 
-      </form>
+            </div>
+          </div>
+          <div class="container-buttons mt-2">
+            <button class="btn btn-primary" type="submit">Submit form</button>
+          </div>
+        </form>
 
-      <table class="table table-hover table-sm mt-5">
-        <thead>
-          <tr>
-            <th scope="col">ID</th>
-            <th scope="col">First</th>
-            <th scope="col">Last</th>
-            <th scope="col">Salary</th>
-            <th scope="col">Manager</th>
-            <th scope="col">Manager ID</th>
-            <th>Edit</th>
-            <th>Delete</th>
-          </tr>
-        </thead>
+        <table class="table table-hover table-sm mt-5">
+          <thead>
+            <tr>
+              <th scope="col">ID</th>
+              <th scope="col">First</th>
+              <th scope="col">Last</th>
+              <th scope="col">Salary</th>
+              <th scope="col">Manager</th>
+              <th scope="col">Manager ID</th>
+              <th>Edit</th>
+              <th>Delete</th>
+            </tr>
+          </thead>
 
-        <tbody id="worker-list"></tbody>
-      </table>
-    </div>
+          <tbody id="worker-list"></tbody>
+        </table>
+      </div>
 
-    <script src="app.js"></script>
-  </body>
-  </html>
+      <script src="app.js"></script>
+    </body>
+    </html>
