@@ -1,6 +1,6 @@
 # employee-tracker CRUD Application
  
- Human Resources organization tool
+ Human Resources organizational tool
  
  (https://w-b28.github.io/hr-tracker/)
 
