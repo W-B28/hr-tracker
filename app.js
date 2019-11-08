@@ -60,12 +60,41 @@ class UI {
       <td>${worker.managerID}</td>
       <td><a href="#" class="btn btn-warning btn-sm edit">*</a></td>
       <td><a href="#" class="btn btn-danger btn-sm delete">x</a></td>
-    `;
+      `;
 
     workerList.appendChild(row);
   }
+  static clearFields() {
+    document.querySelector('#validationFirstName').value = '';
+    document.querySelector('#validationLastName').value = '';
+    document.querySelector('#validationSalary').value = '';
+    document.querySelector('#validationEmployeeID').value = '';
+    document.querySelector('#validationMangerName').value = '';
+    document.querySelector('#validationManagerID').value = '';
+  }
 }
 
-document.addEventListener('DOMContentLoaded', UI.displayWorkers)
+document.addEventListener('DOMContentLoaded', UI.displayWorkers);
 
-// Directory Class to store in local storage
+document.querySelector('#worker-form').addEventListener('submit', (e) => {
+
+  e.preventDefault();
+  // Get form values
+  const firstName = document.querySelector('#validationFirstName').value;
+  const lastName = document.querySelector('#validationLastName').value;
+  const salary = document.querySelector('#validationSalary').value;
+  const id = document.querySelector('#validationEmployeeID').value;
+  const managerName = document.querySelector('#validationMangerName').value;
+  const managerID = document.querySelector('#validationManagerID').value;
+
+  // Instantiate new worker profile from form fields
+  const newWorker = new Person(id, firstName, lastName, salary, managerName, managerID);
+
+  // Add newWorker to table
+  UI.addWorkerToList(newWorker)
+
+  // clearFields
+  UI.clearFields();
+
+
+});
