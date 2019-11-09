@@ -16,33 +16,8 @@ class Person {
 
 class UI {
   static displayWorkers() {
-    const StoredWorkers = [
-      {
-        id : '1',
-        firstName: 'William',
-        lastName: 'Bell',
-        salary: '100k',
-        managerID: '101',
-        managerName: 'Alan'
-      },
-      {
-        id : '2',
-        firstName: 'Jessy',
-        lastName: 'James',
-        salary: '120k',
-        managerID: '101',
-        managerName: 'Alan'
-      },
-      {
-        id : '3',
-        firstName: 'Jason',
-        lastName: 'Bourne',
-        salary: '20k',
-        managerID: '101',
-        managerName: 'Alan'
-      }
-    ];
-    const workers = StoredWorkers;
+    // retrieve workers from localStorage via the Store class
+    const workers = Store.getWorkers();
 
     workers.forEach((worker) => UI.addWorkerToList(worker));
   }
@@ -81,8 +56,40 @@ class UI {
   }
 }
 
+class Store {
+  static getWorkers() {
+    let workers;
+    if(localStorage.getItem('workers') === null) {
+      workers =[];
+    } else {
+      workers = JSON.parse(localStorage.getItem('workers'));
+    }
+    return workers;
+  }
+  static addWorker(worker) {
+    const workers = Store.getWorkers();
+
+    workers.push(worker)
+    localStorage.setItem('workers', JSON.stringify(workers));
+  }
+  static removeWorker(id) {
+    const workers = Store.getWorkers();
+
+    workers.forEach((worker, index) => {
+      if(worker.id === id) {
+        workers.splice(index, 1);
+      }
+    });
+    localStorage.setItem('workers', JSON.stringify(workers));
+  }
+}
+
+
+
+//Event: Display workers
 document.addEventListener('DOMContentLoaded', UI.displayWorkers);
 
+//Event: Add worker to table
 document.querySelector('#worker-form').addEventListener('submit', (e) => {
 
   e.preventDefault();
@@ -94,23 +101,28 @@ document.querySelector('#worker-form').addEventListener('submit', (e) => {
   const managerName = document.querySelector('#validationMangerName').value;
   const managerID = document.querySelector('#validationManagerID').value;
 
-  // Instantiate new worker profile from form values
-  const newWorker = new Person(id, firstName, lastName, salary, managerName, managerID);
 
-  // Add newWorker to table
-  UI.addWorkerToList(newWorker)
+  // Instantiate new worker profile from form values
+  const worker = new Person(id, firstName, lastName, salary, managerName, managerID);
+
+  // Add newWorker to UI
+  UI.addWorkerToList(worker);
+
+  // Add worker to Store
+  Store.addWorker(worker);
 
   // clearFields
   UI.clearFields();
 
 });
 
-// Event to remove selected worker from table
+// Event to remove selected worker from table on the UI
 
 document.querySelector('#worker-list').addEventListener('click', e => {
   UI.deleteWorker(e.target);
-});
 
-const clearBtn = document.querySelector('#worker-list').addEventListener('click', e => {
-  UI.deleteWorker(e.target);
+
+// Remove worker from localStorage (Store)
+Store.removeWorker(e.target.parentElement.previousElementSibling.previousElementSibling
+  .previousElementSibling.previousElementSibling.previousElementSibling.previousElementSibling.previousElementSibling.textContent);
 });
