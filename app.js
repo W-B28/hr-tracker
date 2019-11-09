@@ -4,7 +4,7 @@ Add a new person to be managed, delete a person from
 being managed */
 
 class Person {
-  constructor (id, firstName, lastName, salary, managerID, managerName) {
+  constructor(id, firstName, lastName, salary, managerID, managerName) {
     this.id = id;
     this.firstName = firstName;
     this.lastName = lastName;
@@ -64,6 +64,13 @@ class UI {
 
     workerList.appendChild(row);
   }
+
+  static deleteWorker(el) {
+    if(el.classList.contains('delete')) {
+      el.parentElement.parentElement.remove();
+    }
+  }
+
   static clearFields() {
     document.querySelector('#validationFirstName').value = '';
     document.querySelector('#validationLastName').value = '';
@@ -87,7 +94,7 @@ document.querySelector('#worker-form').addEventListener('submit', (e) => {
   const managerName = document.querySelector('#validationMangerName').value;
   const managerID = document.querySelector('#validationManagerID').value;
 
-  // Instantiate new worker profile from form fields
+  // Instantiate new worker profile from form values
   const newWorker = new Person(id, firstName, lastName, salary, managerName, managerID);
 
   // Add newWorker to table
@@ -96,5 +103,14 @@ document.querySelector('#worker-form').addEventListener('submit', (e) => {
   // clearFields
   UI.clearFields();
 
+});
 
+// Event to remove selected worker from table
+
+document.querySelector('#worker-list').addEventListener('click', e => {
+  UI.deleteWorker(e.target);
+});
+
+const clearBtn = document.querySelector('#worker-list').addEventListener('click', e => {
+  UI.deleteWorker(e.target);
 });
