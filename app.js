@@ -1,7 +1,4 @@
-/* Person Class with methods to: Update ID,
-to update first name, to update last name, update Salary,
-Add a new person to be managed, delete a person from
-being managed */
+// TO DO: Add "edit/update functionality to UI and localStorage"
 
 class Person {
   constructor(id, firstName, lastName, salary, managerID, managerName) {
