@@ -22,16 +22,17 @@ class UI {
     const workerList = document.getElementById('worker-list');
 
     const row = document.createElement('tr');
+    row.id = 'tableRow';
 
     row.innerHTML = `
-      <td>${worker.id}</td>
-      <td>${worker.firstName}</td>
-      <td>${worker.lastName}</td>
-      <td>${worker.salary}</td>
-      <td>${worker.managerName}</td>
-      <td>${worker.managerID}</td>
-      <td><a href="#" class="btn btn-warning btn-sm edit">*</a></td>
-      <td><a href="#" class="btn btn-danger btn-sm delete">x</a></td>
+      <td class="collection-item"><a href="#">${worker.id}</a></td>
+      <td class="collection-item"><a href="#">${worker.firstName}</a></td>
+      <td class="collection-item"><a href="#">${worker.lastName}</a></td>
+      <td class="collection-item"><a href="#">${worker.salary}</a></td>
+      <td class="collection-item"><a href="#">${worker.managerName}</a></td>
+      <td class="collection-item"><a href="#">${worker.managerID}</a></td>
+      <td class="collection-item"><a href="#" class="btn btn-warning btn-sm edit">*</a></td>
+      <td class="collection-item"><a href="#" class="btn btn-danger btn-sm delete">x</a></td>
       `;
 
     workerList.appendChild(row);
@@ -112,6 +113,32 @@ document.querySelector('#worker-form').addEventListener('submit', (e) => {
   UI.clearFields();
 
 });
+
+// Get input element from searchField
+
+let filterInput = document.getElementById('filterInput');
+
+
+filterNames = () => {
+  let filterValue = document.getElementById('filterInput').value.toUpperCase();
+  // Get tableRow
+  let tableRow = document.getElementById('tableRow');
+  // Get tabledItems(.collection-item) from tableRow
+  let tabledItems = tableRow.querySelectorAll('td.collection-item');
+
+  // Loop through collection items on keyup
+  for(let i = 0; i < tabledItems.length; i++) {
+    let a = tabledItems[i].getElementsByTagName('a')[0];
+    // If matched
+    if(a.innerHTML.toUpperCase().indexOf(filterValue) > -1) {
+      tabledItems[i].style.display = '';
+    } else {
+      tabledItems[i].style.display = 'none';
+    }
+  }
+}
+
+filterInput.addEventListener('keyup', filterNames);
 
 // Event to remove selected worker from table on the UI
 

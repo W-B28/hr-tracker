@@ -16,7 +16,6 @@
     <h1 class="display-3 text-center">
       <i class="fas fa-user-friends text-primary"></i>
       My<span class="text-primary">HR</span>Tracker</h1>
-      <!-- Alert message inserted here  -->
 
       <form id="worker-form" class="was-validated">
         <div class="form-row">
@@ -53,17 +52,17 @@
 
           </div>
           <div class="col-md-4 mb-3">
-              <div class="form-group ">
-                <label for="exampleFormControlSelect1">Select Manager</label>
-                <select class="form-control is-invalid" id="validationMangerName" required>
-                  <option selected></option>
-                  <option>Alan</option>
-                  <option>Carey</option>
-                  <option>Josh</option>
-                  <option>Mike</option>
-                  <option>Sean</option>
-                </select>
-              </div>
+            <div class="form-group ">
+              <label for="exampleFormControlSelect1">Select Manager</label>
+              <select class="form-control is-invalid" id="validationMangerName" required>
+                <option selected></option>
+                <option>Alan</option>
+                <option>Carey</option>
+                <option>Josh</option>
+                <option>Mike</option>
+                <option>Sean</option>
+              </select>
+            </div>
           </div>
           <div class="col-md-4 mb-3">
             <label for="validationServer05">Manager ID</label>
@@ -82,29 +81,32 @@
           </div>
         </form>
 
-      <div class="flex-container searchField mt-2 ml-auto">
-        <br><br>
-        <br><br>
-        <input class="pb-2"id="filterInput" style="border-radius: 2%; padding: 6.5px;" type="text" placeholder="Search Names in Table...">
-        <button class="btn btn-light" type="submit" style="border-radius: 4%; padding: 8px;"><b>Search</b></button>
-      </div>
-        <table class="table table-hover table-sm mt-2">
-          <thead>
-            <tr>
-              <th scope="col">ID</th>
-              <th scope="col">First</th>
-              <th scope="col">Last</th>
-              <th scope="col">Salary</th>
-              <th scope="col">Manager</th>
-              <th scope="col">Manager ID</th>
-              <th>Edit</th>
-              <th>Delete</th>
-            </tr>
-          </thead>
-          <tbody id="worker-list"></tbody>
-        </table>
-      </div>
+        <div class="flex-container searchField mt-2 ml-auto">
+          <br><br>
+          <br><br>
+          <input class="searchFieldInput pb-2"id="filterInput" style="padding-left: 0.5rem; border-radius: 1%;" type="text" placeholder="Search Names Below...">
+          <div class="input-group-prepend pb-2" style="display: inline-block;">
+            <span class="input-group-text" style="padding: 0.5rem;" id="searchSubmit" type="submit" onclick="filterNames()">
+              <i class="fas fa-search text-primary"></i>
+            </div></span>
+          </div>
+          <table class="table table-hover table-sm mt-2">
+            <thead>
+              <tr>
+                <th scope="col">ID</th>
+                <th scope="col">First</th>
+                <th scope="col">Last</th>
+                <th scope="col">Salary</th>
+                <th scope="col">Manager</th>
+                <th scope="col">Manager ID</th>
+                <th>Edit</th>
+                <th>Delete</th>
+              </tr>
+            </thead>
+            <tbody id="worker-list"></tbody>
+          </table>
+        </div>
 
-      <script src="app.js"></script>
-    </body>
-    </html>
+        <script src="app.js"></script>
+      </body>
+      </html>
