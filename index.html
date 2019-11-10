@@ -82,7 +82,13 @@
           </div>
         </form>
 
-        <table class="table table-hover table-sm mt-5">
+      <div class="flex-container searchField mt-2 ml-auto">
+        <br><br>
+        <br><br>
+        <input class="pb-2"id="filterInput" style="border-radius: 2%; padding: 6.5px;" type="text" placeholder="Search Names in Table...">
+        <button class="btn btn-light" type="submit" style="border-radius: 4%; padding: 8px;"><b>Search</b></button>
+      </div>
+        <table class="table table-hover table-sm mt-2">
           <thead>
             <tr>
               <th scope="col">ID</th>
@@ -95,7 +101,6 @@
               <th>Delete</th>
             </tr>
           </thead>
-
           <tbody id="worker-list"></tbody>
         </table>
       </div>
