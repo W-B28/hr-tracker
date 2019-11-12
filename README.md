@@ -10,4 +10,4 @@
  * CSS 
  * Bootstrap 
  * Javascript
- * jQuery
+
