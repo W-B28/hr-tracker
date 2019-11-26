@@ -80,32 +80,30 @@
             <input type="submit" value="Submit Form" class="btn btn-primary btn-block">
           </div>
         </form>
-
-        <div class="flex-container searchField mt-2 ml-auto">
-          <br><br>
-          <br><br>
-          <input class="searchFieldInput pb-2"id="filterInput" style="padding-left: 0.5rem; border-radius: 1%;" type="text" placeholder="Search Names Below...">
-          <div class="input-group-prepend pb-2" style="display: inline-block;">
-            <span class="input-group-text" style="padding: 0.5rem;" id="searchSubmit" type="submit" onclick="filterNames()">
-              <i class="fas fa-search text-primary"></i>
-            </div></span>
+  <br><br><br><br>
+          <div id="search-root" class="container-fluid">
+          <input class="searchFieldInput py-1 mb-3"id="searchFieldInput" style="float: right; padding-left: 0.5rem; border-radius: 1%;" type="text" placeholder="Search Names Below...">
+           <div id="table-container">
+              <table class="table table-hover table-sm mt-2" id="worker-table">
+                <thead>
+                  <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">First</th>
+                    <th scope="col">Last</th>
+                    <th scope="col">Salary</th>
+                    <th scope="col">Manager ID</th>
+                    <th scope="col">Manager</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                  </tr>
+                </thead>
+                <tbody id="worker-list"></tbody>
+              </table>
+            </div>
           </div>
-          <table class="table table-hover table-sm mt-2">
-            <thead>
-              <tr>
-                <th scope="col">ID</th>
-                <th scope="col">First</th>
-                <th scope="col">Last</th>
-                <th scope="col">Salary</th>
-                <th scope="col">Manager</th>
-                <th scope="col">Manager ID</th>
-                <th>Edit</th>
-                <th>Delete</th>
-              </tr>
-            </thead>
-            <tbody id="worker-list"></tbody>
-          </table>
         </div>
+      </div>
+    </div>
 
         <script src="app.js"></script>
       </body>
