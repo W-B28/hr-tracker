@@ -26,7 +26,7 @@ class UI {
     const myNode = document.getElementById("worker-list");
     while (myNode.firstChild) {
       myNode.removeChild(myNode.firstChild);
-      }
+    }
     arr.forEach((tempWorker) => UI.addWorkerToList(tempWorker));
 
   }
@@ -35,17 +35,18 @@ class UI {
 
     const row = document.createElement('tr');
     row.id = 'tableRow';
+    row.class = 'table table-hover'
 
     row.innerHTML = `
-      <td class="collection-item"><a href="#">${worker.id}</a></td>
-      <td class="collection-item"><a href="#">${worker.firstName}</a></td>
-      <td class="collection-item"><a href="#">${worker.lastName}</a></td>
-      <td class="collection-item"><a href="#">${worker.salary}</a></td>
-      <td class="collection-item"><a href="#">${worker.managerName}</a></td>
-      <td class="collection-item"><a href="#">${worker.managerID}</a></td>
-      <td><a href="#" class="btn btn-warning btn-sm edit">*</a></td>
-      <td><a href="#" class="btn btn-danger btn-sm delete">x</a></td>
-      `;
+    <td class="collection-item"><a href="#"contenteditable="true">${worker.id}</a></td>
+    <td class="collection-item"><a href="#"contenteditable="true">${worker.firstName}</a></td>
+    <td class="collection-item"><a href="#"contenteditable="true">${worker.lastName}</a></td>
+    <td class="collection-item"><a href="#"contenteditable="true">${worker.salary}</a></td>
+    <td class="collection-item"><a href="#"contenteditable="true">${worker.managerName}</a></td>
+    <td class="collection-item"><a href="#"contenteditable="true">${worker.managerID}</a></td>
+    <td><a href="#" class="btn btn-danger btn-sm delete"><b>X</b></a></td>
+    `;
+    // TO DO: ONCE EDITED DELETE CURRENT ROW FROM LOCAL STORAGE THEN RESUBMIT THE ROW ////
 
     workerList.appendChild(row);
   }
@@ -55,6 +56,7 @@ class UI {
       el.parentElement.parentElement.remove();
     }
   }
+
 
   static clearFields() {
     document.querySelector('#validationFirstName').value = '';
@@ -67,6 +69,7 @@ class UI {
 }
 
 class Store {
+
   static getWorkers() {
     let workers;
     if(localStorage.getItem('workers') === null) {
@@ -76,12 +79,14 @@ class Store {
     }
     return workers;
   }
+
   static addWorker(worker) {
     const workers = Store.getWorkers();
 
     workers.push(worker)
     localStorage.setItem('workers', JSON.stringify(workers));
   }
+
   static removeWorker(id) {
     const workers = Store.getWorkers();
 
@@ -124,17 +129,6 @@ document.querySelector('#worker-form').addEventListener('submit', (e) => {
 
 });
 
-const tableData = () => {
-  const search = [];
-  const tableElement = document.getElementById('worker-table');
-  console.log(Array.from(tableElement.children[1]));
-}
-
-tableData();
-
-
-
-
 // loop through workers in tabledItems
 
 filterNames = () => {
@@ -147,96 +141,28 @@ filterNames = () => {
     // console.log(searchableData)
     // get typed characters in search inputfield
     let searchFieldInput = document.getElementById('searchFieldInput').value;
-      for(el in worker){
-        // console.log(searchFieldInput);
-        if(worker[el].indexOf(searchFieldInput) == 0) {
-          if(searchableData.indexOf(worker)){
-            searchableData.push(worker);
-          }
-
-          // console.log(searchFieldInput)
-          console.log(worker[el].indexOf(searchFieldInput) )
-        // if statement if indexOf = 0 push to searchableData
+    searchFieldInput = searchFieldInput.toLowerCase();
+    for(el in worker){
+      // console.log(searchFieldInput);
+      let tempVar = worker[el].toLowerCase();
+      if(tempVar.indexOf(searchFieldInput) == 0) {
+        if(searchableData.indexOf(worker) == -1){
+          searchableData.push(worker);
+        }
       }
     }
     UI.displayTempWorkers(searchableData);
   });
-  //
 }
 
-    // compare those characters to searchData on keyup
-      // if typed characters in search field MATCH anything in the
-      // searchData array then display that row on UI
-      // else if NOT MATCH on keyup Hide row display
+let filterInput = document.getElementById('searchFieldInput');
+filterInput.addEventListener('keyup', filterNames);
 
-
-
-  let filterInput = document.getElementById('searchFieldInput');
-  filterInput.addEventListener('keyup', filterNames);
-
-
-
-
-
-
-
-  // create temp array store as attribute in UI
-//   let tempArr = [];
-//
-// let filterValue = document.getElementById('filterInput').value.toUpperCase();
-//   // Get tableRow
-//   let tableRow = document.getElementById('tableRow');
-//   // Get tabledData(.collection-item) from tableRow
-//   let tabledData = [...tableRow.querySelectorAll('td.collection-item')];
-
-
-// check against all fields
-// for(let i = 0; i < tabledData.length; i++) {
-//   let a = tabledData[i].getElementsByTagName('a')[0];
-//   // If matched
-//   if(a.innerHTML.toUpperCase().indexOf(filterValue) > -1) {
-//     // const tempWorker = new Person(id, firstName, lastName, salary, managerName, managerID);
-//
-//     console.log(a.parentElement.parentElement);
-//     console.log(a.innerHTML.toUpperCase().indexOf(filterValue) > -1);
-// //     // partial matched send to temp array
-// //     // tabledItems[i].style.display = '';
-//   }
-// }
-
-// pass in temp arry and run render to table
-// let filterInput = document.getElementById('searchFieldInput');
-// filterInput.addEventListener('keyup', filterNames);
-
-
-
-// filterNames = () => {
-//   let filterValue = document.getElementById('filterInput').value.toUpperCase();
-//   // Get tableRow
-//   let tableRow = document.getElementById('tableRow');
-//   // Get tabledItems(.collection-item) from tableRow
-//   let tabledItems = tableRow.querySelectorAll('td.collection-item');
-//
-//   // Loop through collection items on keyup
-//   for(let i = 0; i < tabledItems.length; i++) {
-//     let a = tabledItems[i].getElementsByTagName('a')[0];
-    // If matched
-  //   if(a.innerHTML.toUpperCase().indexOf(filterValue) > -1) {
-  //     tabledItems[i].style.display = '';
-  //   } else {
-  //     tabledItems[i].style.display = 'none';
-  //   }
-  // }
-// }
-//
-// filterInput.addEventListener('keyup', filterNames);
 
 // Event to remove selected worker from table on the UI
 
 document.querySelector('#worker-list').addEventListener('click', e => {
   UI.deleteWorker(e.target);
-
-
-// Remove worker from localStorage (Store)
-Store.removeWorker(e.target.previousElementSibling.textContent);
+// Remove worker from localStorage
+    Store.removeWorker(e.target.parentElement.previousElementSibling.previousElementSibling.previousElementSibling.previousElementSibling.previousElementSibling.previousElementSibling.textContent);
 });
