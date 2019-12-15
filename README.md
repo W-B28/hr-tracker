@@ -8,6 +8,6 @@
  # Tech
  * HTML
  * CSS (barely)
- * Bootstrap 
+ * Bootstrap (mostly) 
  * Javascript
 
