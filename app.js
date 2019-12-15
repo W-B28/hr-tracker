@@ -1,7 +1,3 @@
-// TO DO: Add "edit/update functionality to UI and localStorage"
-// Fix buggy search filter
-
-// https://www.youtube.com/watch?v=3NG8zy0ywIk
 
 class Person {
   constructor(id, firstName, lastName, salary, managerID, managerName) {
@@ -16,7 +12,7 @@ class Person {
 
 class UI {
   static displayWorkers() {
-    // retrieve workers from localStorage via the Store class
+    // retrieve workers from sessionStorage via the Store class
     const workers = Store.getWorkers();
 
     workers.forEach((worker) => UI.addWorkerToList(worker));
@@ -30,12 +26,15 @@ class UI {
     arr.forEach((tempWorker) => UI.addWorkerToList(tempWorker));
 
   }
+
+  // add num below as input
   static addWorkerToList(worker) {
     const workerList = document.getElementById('worker-list');
 
     const row = document.createElement('tr');
     row.id = 'tableRow';
     row.class = 'table table-hover'
+
 
     row.innerHTML = `
     <td class="collection-item"><a href="#"contenteditable="true">${worker.id}</a></td>
@@ -46,7 +45,6 @@ class UI {
     <td class="collection-item"><a href="#"contenteditable="true">${worker.managerID}</a></td>
     <td><a href="#" class="btn btn-danger btn-sm delete"><b>X</b></a></td>
     `;
-    // TO DO: ONCE EDITED DELETE CURRENT ROW FROM LOCAL STORAGE THEN RESUBMIT THE ROW ////
 
     workerList.appendChild(row);
   }
@@ -72,10 +70,10 @@ class Store {
 
   static getWorkers() {
     let workers;
-    if(localStorage.getItem('workers') === null) {
+    if(sessionStorage.getItem('workers') === null) {
       workers =[];
     } else {
-      workers = JSON.parse(localStorage.getItem('workers'));
+      workers = JSON.parse(sessionStorage.getItem('workers'));
     }
     return workers;
   }
@@ -84,7 +82,7 @@ class Store {
     const workers = Store.getWorkers();
 
     workers.push(worker)
-    localStorage.setItem('workers', JSON.stringify(workers));
+    sessionStorage.setItem('workers', JSON.stringify(workers));
   }
 
   static removeWorker(id) {
@@ -95,7 +93,7 @@ class Store {
         workers.splice(index, 1);
       }
     });
-    localStorage.setItem('workers', JSON.stringify(workers));
+    sessionStorage.setItem('workers', JSON.stringify(workers));
   }
 }
 
@@ -132,13 +130,13 @@ document.querySelector('#worker-form').addEventListener('submit', (e) => {
 // loop through workers in tabledItems
 
 filterNames = () => {
-  // get items out of localStorage
+  // get items out of sessionStorage
   const allWorkers = Store.getWorkers();
-  // declare empty array to push localStorage data to
+  // declare empty array to push sessionStorage data to
   const searchableData = [];
   // loop through allWorkers and push data to searchableData array
   allWorkers.forEach(function(worker) {
-    // console.log(searchableData)
+
     // get typed characters in search inputfield
     let searchFieldInput = document.getElementById('searchFieldInput').value;
     searchFieldInput = searchFieldInput.toLowerCase();
@@ -155,6 +153,7 @@ filterNames = () => {
   });
 }
 
+
 let filterInput = document.getElementById('searchFieldInput');
 filterInput.addEventListener('keyup', filterNames);
 
@@ -163,6 +162,6 @@ filterInput.addEventListener('keyup', filterNames);
 
 document.querySelector('#worker-list').addEventListener('click', e => {
   UI.deleteWorker(e.target);
-// Remove worker from localStorage
+// Remove worker from sessionStorage
     Store.removeWorker(e.target.parentElement.previousElementSibling.previousElementSibling.previousElementSibling.previousElementSibling.previousElementSibling.previousElementSibling.textContent);
 });
