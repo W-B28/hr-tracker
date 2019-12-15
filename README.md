@@ -7,7 +7,7 @@
  
  # Tech
  * HTML
- * CSS 
+ * CSS (barely)
  * Bootstrap 
  * Javascript
 
